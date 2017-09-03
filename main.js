@@ -1,14 +1,13 @@
 (function() {
   var httpRequest;
-//  document.getElementById("ajaxButton").addEventListener('click', makeRequest);
 
-	makeRequest();
+  makeRequest();
 
   function makeRequest() {
     httpRequest = new XMLHttpRequest();
 
     if (!httpRequest) {
-      alert('Giving up :( Cannot create an XMLHTTP instance');
+      console.log('Giving up. Cannot create an XMLHTTP instance');
       return false;
     }
 
@@ -21,9 +20,9 @@
   function alertContents() {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
-        alert(httpRequest);
+        console.log('Request Successful');
       } else {
-        alert('There was a problem with the request.');
+        console.log('There was a problem with the request.');
       }
     }
   }
