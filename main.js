@@ -1,6 +1,8 @@
 (function() {
   var httpRequest;
-  document.getElementById("ajaxButton").addEventListener('click', makeRequest);
+//  document.getElementById("ajaxButton").addEventListener('click', makeRequest);
+
+	makeRequest();
 
   function makeRequest() {
     httpRequest = new XMLHttpRequest();
@@ -10,7 +12,7 @@
       return false;
     }
 
-    var endpoint = 'http://localhost:3000';
+    var endpoint = 'http://localhost:3000/weather';
     httpRequest.onreadystatechange = alertContents;
     httpRequest.open('GET', endpoint, true);
     httpRequest.send();
