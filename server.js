@@ -15,14 +15,17 @@ app.get('/', function (req, res) {
 });
 
 app.get('/weather', function(req, res) {
-	res.send('This is the weather route. We\'ll get you some WX yo!');
 	var endpoint = 'https://api.darksky.net/forecast/55b410cf02d986a74bb67a66e7057eae/40.016457, -105.285884?exclude=minutely,daily,hourly,alerts,flags';
+	var darkSky;
 
 	fetch(endpoint)
 		.then(function(res) {
 			return res.json();
 		}).then(function(json) {
 			console.log(json);
+			darkSky = json;
+		}).then(function(){
+			res.send(darkSky);
 		});
 });
 
