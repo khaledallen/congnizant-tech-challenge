@@ -22,7 +22,6 @@ app.get('/weather', function(req, res) {
 		.then(function(res) {
 			return res.json();
 		}).then(function(json) {
-			console.log(json);
 			darkSky = json;
 		}).then(function(){
 			res.send(darkSky);
@@ -30,5 +29,5 @@ app.get('/weather', function(req, res) {
 });
 
 app.listen(3000, function () {
-	console.log('Example app listening on port 3000!')
+	console.log('Listening on port 3000!')
 })
