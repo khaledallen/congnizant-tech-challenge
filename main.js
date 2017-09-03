@@ -3,6 +3,11 @@
 	var conditions = '';
 
 	var content = document.getElementById('content');
+	var yourName = document.getElementById('your-name');
+	var submitName = document.getElementById('submit-name-btn').addEventListener('click', changeName);
+	var nameField = document.getElementById('name-field');
+
+	yourName.innerHTML = "Khaled";
 
   makeRequest();
 
@@ -34,4 +39,11 @@
       }
     }
   }
+
+	function changeName(e) {
+		e.preventDefault();
+		var name = nameField.value;
+
+		yourName.innerHTML = name;
+	}
 })();

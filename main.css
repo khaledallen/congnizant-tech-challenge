@@ -56,8 +56,9 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-h1 {
-	color: red;
+body {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
 
