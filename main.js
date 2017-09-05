@@ -33,7 +33,6 @@
 		  coords.longitude = '-105.285884',
 		  coords.latitude = '40.016457'
 	  }
-	  console.log(JSON.stringify(coords));
     httpRequest.onreadystatechange = applyWx;
     httpRequest.open('POST', endpoint, true);
     httpRequest.setRequestHeader("Content-type", "application/json");

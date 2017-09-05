@@ -13,13 +13,11 @@ app.use(function(req, res, next) {
 });
 
 app.post('/weather', jsonParser, function(req, res) {
-	console.log(req.body);
 	var endpoint = 'https://api.darksky.net/forecast/55b410cf02d986a74bb67a66e7057eae/';
 	endpoint += req.body.latitude;
 	endpoint += ',';
 	endpoint += req.body.longitude;
 	endpoint += '?exclude=minutely,daily,hourly,alerts,flags';
-	console.log(endpoint);
 
 	var darkSky;
 
@@ -28,7 +26,6 @@ app.post('/weather', jsonParser, function(req, res) {
 			return res.json();
 		}).then(function(json) {
 			darkSky = json;
-			console.log(darkSky);
 		}).then(function(){
 			res.send(darkSky);
 		});
