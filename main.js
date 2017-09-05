@@ -28,7 +28,7 @@
     var coords = {}; 
 	  if(lon !== undefined && lat !== undefined) {
 		  coords.longitude = lon,
-	          coords.latitude=lat
+	          coords.latitude = lat
 	  } else {
 		  coords.longitude = '-105.285884',
 		  coords.latitude = '40.016457'
@@ -75,6 +75,10 @@
 	function customWx() {
 		var lonCoord = lon.value;
 		var latCoord = lat.value;
-		makeRequest(lonCoord, latCoord);
+		if (lonCoord < -180 || lonCoord > 180 || latCoord < -90 || latCoord > 90) {
+			alert("You have entered invalid coordinates. Please enter longitude between -180 and 180, and latitude between -90 and 90");
+		} else {
+			makeRequest(lonCoord, latCoord);
+		}
 	}
 })();
