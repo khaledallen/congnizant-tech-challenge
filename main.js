@@ -6,14 +6,17 @@
 	var yourName = document.getElementById('your-name');
 	var submitName = document.getElementById('submit-name-btn').addEventListener('click', changeName);
 	var nameField = document.getElementById('name-field');
-
 	yourName.innerHTML = "Khaled";
+
+	var lon = document.getElementById('lon-field');
+	var lat = document.getElementById('lat-field');
+	var submitCoords = document.getElementById('submit-customcoords-btn').addEventListener('click', customWx);
+
 	var wxCol = document.getElementsByClassName('wx');
 
-	console.log(wxCol);
-  makeRequest();
+	makeRequest();
 
-  function makeRequest() {
+  function makeRequest(lon,lat) {
     httpRequest = new XMLHttpRequest();
 
     if (!httpRequest) {
@@ -22,13 +25,24 @@
     }
 
     var endpoint = 'http://localhost:3000/weather';
-    httpRequest.onreadystatechange = alertContents;
-    httpRequest.open('GET', endpoint, true);
-	  httpRequest.responseType = 'json';
-    httpRequest.send();
+    var coords = {}; 
+	  if(lon !== undefined && lat !== undefined) {
+		  coords.longitude = lon,
+	          coords.latitude=lat
+	  } else {
+		  coords.longitude = '-105.285884',
+		  coords.latitude = '40.016457'
+	  }
+	  console.log(JSON.stringify(coords));
+    httpRequest.onreadystatechange = applyWx;
+    httpRequest.open('POST', endpoint, true);
+    httpRequest.setRequestHeader("Content-type", "application/json");
+
+    httpRequest.responseType = 'json';
+    httpRequest.send(JSON.stringify(coords));
   }
 
-  function alertContents() {
+  function applyWx() {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
 	      let res = httpRequest.response.currently;
@@ -39,7 +53,7 @@
 
 	      document.getElementById('jumbotron').className += " " + wx + "-image";
 	      for(let i = 0; i < wxCol.length; i++) {
-		      wxCol[i].className += " " + wx;
+		      wxCol[i].className = "wx " + wx;
 	      }
 
 	      var r = Math.floor((res.dewPoint / 100) * 255);
@@ -55,9 +69,13 @@
   }
 
 	function changeName(e) {
-		e.preventDefault();
 		var name = nameField.value;
-
 		yourName.innerHTML = name;
+	}
+
+	function customWx() {
+		var lonCoord = lon.value;
+		var latCoord = lat.value;
+		makeRequest(lonCoord, latCoord);
 	}
 })();
