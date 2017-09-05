@@ -50,7 +50,7 @@
 	      content.innerHTML = conditions;
 	      let wx = res.icon;
 
-	      document.getElementById('jumbotron').className += " " + wx + "-image";
+	      document.getElementById('jumbotron').className = "jumbotron " + wx + "-image";
 	      for(let i = 0; i < wxCol.length; i++) {
 		      wxCol[i].className = "wx " + wx;
 	      }
